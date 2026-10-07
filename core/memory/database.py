@@ -51,6 +51,20 @@ class MemoryDatabase:
         )
 
         self.connection.commit()
+    def update_memory(self, old_content, new_content):
+
+        self.cursor.execute(
+            """
+            UPDATE memories
+            SET content = ?
+            WHERE content = ?
+            """,
+            (new_content, old_content),
+        )
+
+        self.connection.commit()
+
+        return self.cursor.rowcount > 0
     def get_all_memories(self):
 
         self.cursor.execute("""

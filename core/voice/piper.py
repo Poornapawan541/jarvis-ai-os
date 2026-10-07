@@ -12,11 +12,22 @@ import simpleaudio as sa
 class TextToSpeech:
 
     def __init__(self):
+
         # Project root
-        self.root = Path(__file__).resolve().parent.parent.parent
+        self.root = (
+            Path(__file__)
+            .resolve()
+            .parent
+            .parent
+            .parent
+        )
 
         # Piper executable
-        self.piper = self.root / "piper" / "piper.exe"
+        self.piper = (
+            self.root
+            / "piper"
+            / "piper.exe"
+        )
 
         # Voice model
         self.model = (
@@ -27,11 +38,12 @@ class TextToSpeech:
         )
 
         # Output audio
-        self.output = self.root / "output.wav"
+        self.output = (
+            self.root
+            / "output.wav"
+        )
 
     def speak(self, text: str):
-
-        print(f"\n🤖 Jarvis: {text}\n")
 
         command = [
             str(self.piper),
@@ -45,11 +57,16 @@ class TextToSpeech:
             command,
             input=text,
             text=True,
-            capture_output=True
+            capture_output=True,
+            check=True,
         )
 
-        wave = sa.WaveObject.from_wave_file(str(self.output))
+        wave = sa.WaveObject.from_wave_file(
+            str(self.output)
+        )
+
         play = wave.play()
+
         play.wait_done()
 
 

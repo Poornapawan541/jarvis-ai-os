@@ -4,8 +4,26 @@ JARVIS AI - Speech To Text Module
 =========================================
 """
 
+import os
+import sys
+from pathlib import Path
 from faster_whisper import WhisperModel
-from config import WHISPER_MODEL
+from config import WHISPER_MODEL, WHISPER_DEVICE, WHISPER_COMPUTE_TYPE
+
+# Ensure bundled NVIDIA DLLs are found by ctranslate2 on Windows
+if sys.platform == "win32":
+    venv_site = Path(sys.prefix) / "Lib" / "site-packages" / "nvidia"
+    for sub in ["cublas", "cudnn", "cuda_nvrtc"]:
+        dll_dir = venv_site / sub / "bin"
+        if dll_dir.is_dir():
+            dll_dir_str = str(dll_dir)
+            if dll_dir_str not in os.environ.get("PATH", ""):
+                os.environ["PATH"] = dll_dir_str + os.pathsep + os.environ.get("PATH", "")
+            if hasattr(os, "add_dll_directory"):
+                try:
+                    os.add_dll_directory(dll_dir_str)
+                except Exception:
+                    pass
 
 
 class SpeechToText:
@@ -16,8 +34,8 @@ class SpeechToText:
 
         self.model = WhisperModel(
             WHISPER_MODEL,
-            device="cpu",
-            compute_type="int8"
+            device=getattr(self, "device", WHISPER_DEVICE),
+            compute_type=getattr(self, "compute_type", WHISPER_COMPUTE_TYPE)
         )
 
         print("✅ Whisper Loaded Successfully!")

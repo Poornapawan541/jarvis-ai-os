@@ -1,42 +1,86 @@
+# =========================
 # Python
+# =========================
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 
-# Virtual Environment
+# Virtual environments
 .venv/
 venv/
+env/
 
-# Environment Variables
+# =========================
+# Secrets / Credentials
+# =========================
 .env
+credentials.json
+token.json
+*.pem
+*.key
+secrets/
+config.local.py
 
+# =========================
+# JARVIS Local Data
+# =========================
+data/*.db
+data/memory.db
+data/chrome_automation/
+data/whatsapp_profile/
+
+# =========================
+# Audio / Recordings
+# =========================
+*.wav
+*.mp3
+*.ogg
+*.flac
+recording.wav
+output.wav
+
+# =========================
 # Logs
+# =========================
 logs/
 *.log
 
-# Audio
-recording.wav
+# =========================
+# Models / Large Files
+# =========================
+models/
+*.bin
+*.pt
+*.pth
+*.onnx
+.cache/
+ollama_models/
+
+# =========================
+# Testing / Temporary Files
+# =========================
 *.tmp
+*.temp
+*.bak
+.pytest_cache/
+.mypy_cache/
 
-# VS Code
-.vscode/settings.json
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Python Build
+# =========================
+# Build
+# =========================
 build/
 dist/
 *.egg-info/
 
-# Cache
-.pytest_cache/
-.mypy_cache/
-
-# Hugging Face Cache
-.cache/
-
-# Ollama Cache
-ollama_models/
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db

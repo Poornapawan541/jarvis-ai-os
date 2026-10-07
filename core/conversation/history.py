@@ -21,6 +21,9 @@ class ConversationHistory:
     def get_messages(self):
         return list(self.messages)
 
+    def get_recent(self, count=5):
+        return list(self.messages)[-count:]
+
     def clear(self):
         self.messages.clear()
 

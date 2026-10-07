@@ -21,12 +21,16 @@ SAMPLE_RATE = 16000
 CHANNELS = 1
 CHUNK_SIZE = 1280
 RECORD_SECONDS = 5
+SILENCE_TIMEOUT = 1.0
+MAX_RECORD_SECONDS = 15.0
 
 # -----------------------------
 # Whisper Settings
 # -----------------------------
 
-WHISPER_MODEL = "base"
+WHISPER_MODEL = "small"
+WHISPER_DEVICE = "cuda"
+WHISPER_COMPUTE_TYPE = "float16"
 
 # Available models:
 # tiny
